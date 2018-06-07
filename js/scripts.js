@@ -98,12 +98,13 @@ $(function(){
 
   $("#submit-button").click(function(event){
     event.preventDefault();
-    var userInput = parseInt($("#user-input").val());
-    var userOnes = "this will be the ones place number after we split the number into places"
-    var userTens = "this will be the tens place number after we split the number into places"
-    var userHundreds = "this will be the hundreds place number after we split the number into places"
-    var userThousands = "this will be the thousands place number after we split the number into places"
-    
+    var userInput = $("#user-input").val();
+    var userInputSplit = userInput.split("");
+    var userOnes = userInputSplit[userInputSplit.length - 1];
+    var userTens = userInputSplit[userInputSplit.length - 2];
+    var userHundreds = userInputSplit[userInputSplit.length - 3];
+    var userThousands = userInputSplit[userInputSplit.length - 4];
+
     onesPlace(userOnes);
     tensPlace(userTens);
     hundredsPlace(userHundreds);
