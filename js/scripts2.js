@@ -94,33 +94,27 @@ function finalNumeral(onesFinal, tensFinal, hundredsFinal, thousandsFinal){
   $("#result").slideDown();
 }
 
-function failTest(unparsedInput){
-    var parsedInput = parseInt(unparsedInput);
-
-    if (parsedInput < 1 || parsedInput > 3999) {
-      alert("You have entered number that can not be converted!")
-    } else {
-      var userInputSplit = unparsedInput.split("");
-      var userOnes = parseInt(userInputSplit[userInputSplit.length - 1]);
-      var userTens = parseInt(userInputSplit[userInputSplit.length - 2]);
-      var userHundreds = parseInt(userInputSplit[userInputSplit.length - 3]);
-      var userThousands = parseInt(userInputSplit[userInputSplit.length - 4]);
-      var finalOnes = onesPlace(userOnes);
-      var finalTens = tensPlace(userTens);
-      var finalHundreds = hundredsPlace(userHundreds);
-      var finalThousands = thousandsPlace(userThousands);
-      var numeralFinal = finalNumeral(finalOnes, finalTens, finalHundreds, finalThousands);
-      return numeralFinal;
-    }
-}
-
 // USER INTERFACE LOGIC
 $(function(){
 
   $("#submit-button").click(function(event){
     event.preventDefault();
     var userInput = $("#user-input").val();
-    failTest(userInput);
+    var userInputSplit = userInput.split("");
+    var userOnes = parseInt(userInputSplit[userInputSplit.length - 1]);
+    var userTens = parseInt(userInputSplit[userInputSplit.length - 2]);
+    var userHundreds = parseInt(userInputSplit[userInputSplit.length - 3]);
+    var userThousands = parseInt(userInputSplit[userInputSplit.length - 4]);
+    var finalOnes = onesPlace(userOnes);
+    var finalTens = tensPlace(userTens);
+    var finalHundreds = hundredsPlace(userHundreds);
+    var finalThousands = thousandsPlace(userThousands);
+    finalNumeral(finalOnes, finalTens, finalHundreds, finalThousands);
+
+
+
+    // $("#result").text(finalResult);
+
   });
 
 
