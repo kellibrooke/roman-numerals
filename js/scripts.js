@@ -1,7 +1,7 @@
 // BUSINESS LOGIC
 
 function onesPlace(ones){
-  var underTen;
+  var underTen = "";
   var singleI = "I";
   var singleV = "V";
   var singleX = "X";
@@ -18,12 +18,11 @@ function onesPlace(ones){
   } else if (ones === 10){
     underTen = singleX;
   }
-  console.log(underTen);
-  underTen = "";
+  return underTen;
 }
 
 function tensPlace(tens){
-  var underHundred;
+  var underHundred = "";
   var singleX = "X";
   var singleL = "L";
   var singleC = "C";
@@ -41,12 +40,11 @@ function tensPlace(tens){
   } else if (tens === 10){
     underHundred = singleC;
   }
-  console.log(underHundred);
-  underHundred = "";
+  return underHundred;
 }
 
 function hundredsPlace(hundreds){
-  var underThousand;
+  var underThousand = "";
   var singleC = "C";
   var singleD = "D";
   var singleM = "M";
@@ -58,18 +56,17 @@ function hundredsPlace(hundreds){
   } else if (hundreds === 5){
     underThousand = singleD;
   } else if (hundreds <= 8 && hundreds > 5){
-    underThousand = singleD + singleM.repeat(hundreds - 5);
+    underThousand = singleD + singleC.repeat(hundreds - 5);
   } else if (hundreds === 9){
     underThousand = singleC + singleM;
   } else if (hundreds === 10){
     underThousand = singleM;
   }
-  console.log(underThousand);
-  underThousand = "";
+  return underThousand;
 }
 
 function thousandsPlace(thousands){
-  var underTenThousand;
+  var underTenThousand = "";
   var singleM = "M";
   var bigV = "<span class='big-letter'>V</span>";
   var bigX = "<span class='big-letter'>X</span>";
@@ -87,11 +84,15 @@ function thousandsPlace(thousands){
   } else if (thousands === 10){
     underTenThousand = bigX;
   }
-  console.log(underTenThousand);
-  underTenThousand = "";
+
+  return underTenThousand;
 }
 
-
+function finalNumeral(onesFinal, tensFinal, hundredsFinal, thousandsFinal){
+  var finalResult = thousandsFinal + hundredsFinal + tensFinal + onesFinal;
+  $("#result").html(finalResult);
+  $("#result").slideDown();
+}
 
 // USER INTERFACE LOGIC
 $(function(){
@@ -100,15 +101,19 @@ $(function(){
     event.preventDefault();
     var userInput = $("#user-input").val();
     var userInputSplit = userInput.split("");
-    var userOnes = userInputSplit[userInputSplit.length - 1];
-    var userTens = userInputSplit[userInputSplit.length - 2];
-    var userHundreds = userInputSplit[userInputSplit.length - 3];
-    var userThousands = userInputSplit[userInputSplit.length - 4];
+    var userOnes = parseInt(userInputSplit[userInputSplit.length - 1]);
+    var userTens = parseInt(userInputSplit[userInputSplit.length - 2]);
+    var userHundreds = parseInt(userInputSplit[userInputSplit.length - 3]);
+    var userThousands = parseInt(userInputSplit[userInputSplit.length - 4]);
+    var finalOnes = onesPlace(userOnes);
+    var finalTens = tensPlace(userTens);
+    var finalHundreds = hundredsPlace(userHundreds);
+    var finalThousands = thousandsPlace(userThousands);
+    finalNumeral(finalOnes, finalTens, finalHundreds, finalThousands);
 
-    onesPlace(userOnes);
-    tensPlace(userTens);
-    hundredsPlace(userHundreds);
-    thousandsPlace(userThousands);
+
+
+    // $("#result").text(finalResult);
 
   });
 
